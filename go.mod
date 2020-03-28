@@ -5,6 +5,7 @@ go 1.13
 require (
 	github.com/gofiber/fiber v1.8.42
 	github.com/google/uuid v1.1.1
+	github.com/jinzhu/gorm v1.9.12
 	github.com/joho/godotenv v1.3.0
 	github.com/klauspost/compress v1.10.3 // indirect
 	github.com/klauspost/cpuid v1.2.3 // indirect
