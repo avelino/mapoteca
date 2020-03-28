@@ -1,4 +1,4 @@
-module mtmr0x/mapoteca
+module mapoteca
 
 go 1.13
 

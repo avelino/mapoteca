@@ -1,7 +1,7 @@
 package main
 
 import (
-	"mtmr0x/mapoteca/application"
+	"mapoteca/application"
 )
 
 func main() {
