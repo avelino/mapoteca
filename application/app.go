@@ -23,6 +23,7 @@ func Run() {
 	})
 
 	app.Get("/post", post.GetPosts)
+	app.Get("/post/:slug", post.GetPostBySlug)
 
 	app.Post("/post/new", post.NewPost)
 
