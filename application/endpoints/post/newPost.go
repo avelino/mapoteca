@@ -4,11 +4,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gofiber/fiber"
+	slugify "github.com/gosimple/slug"
 	postModel "mapoteca/application/database/models/post"
 	"mapoteca/application/logger"
 	"mapoteca/application/models"
 	"reflect"
-	"strings"
 	"time"
 )
 
@@ -44,10 +44,10 @@ func validateFields(p *newPost) (bool, []string) {
 
 func slugCreator(slug string, title string) string {
 	if slug == "" || len(slug) < 5 {
-		return strings.Replace(title, " ", "-", -1)
+		return slugify.Make(title)
 	}
 
-	return strings.Replace(slug, " ", "-", -1)
+	return slugify.Make(slug)
 }
 
 func NewPost(context *fiber.Ctx) {
