@@ -1,7 +1,6 @@
 package application
 
 import (
-	"encoding/json"
 	"github.com/gofiber/fiber"
 	"mapoteca/application/config"
 	"mapoteca/application/database"
@@ -19,17 +18,11 @@ func Run() {
 	var db = database.Connect()
 	defer db.Close()
 
-	app.Get("/posts", func(c *fiber.Ctx) {
-		log.Info("request made at /posts")
-		var posts = post.GetPosts()
-		var response, _ = json.Marshal(posts)
-
-		c.Send(response)
-	})
-
 	app.Get("/ping", func(c *fiber.Ctx) {
 		c.Send("pong")
 	})
+
+	app.Get("/post", post.GetPosts)
 
 	app.Post("/post/new", post.NewPost)
 
