@@ -12,4 +12,5 @@ type Post struct {
 	ImagePath string    `json:"imagePath"`
 	Category  string    `json:"category"`
 	CreatedAt time.Time `json:"createdAt"`
+	Content   string    `json:"content"`
 }
