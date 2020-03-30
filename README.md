@@ -18,7 +18,7 @@ Create your dataase and make sure to fill the environment variables at `.env` af
 
 We use `dotenv` for managing environment variables. Check the `.env.sample` in the root folder to check the documentation for all necessary variables to be configured.
 
-Create a copy of `.env.sample` and name it as `.env` and fill its values according to the documentation inside the file.
+Create a copy of `.env.sample`, name it as `.env` and fill its values according to the documentation inside the file.
 
 ## Run server
 
