@@ -14,7 +14,12 @@ type databaseConfig struct {
 	SslMode  string
 }
 
+type serverConfig struct {
+	Port string
+}
+
 var DatabaseConfig databaseConfig
+var ServerConfig serverConfig
 
 func Init() {
 	var err = godotenv.Load()
@@ -30,5 +35,9 @@ func Init() {
 		User:     os.Getenv("POSTGRESQL_DATABASE_USER"),
 		Password: os.Getenv("POSTGRESQL_DATABASE_PASSWORD"),
 		SslMode:  os.Getenv("POSTGRESQL_DATABASE_SSL_MODE"),
+	}
+
+	ServerConfig = serverConfig{
+		Port: os.Getenv("SERVER_PORT"),
 	}
 }
