@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"github.com/google/uuid"
 	"github.com/jinzhu/gorm"
-	"mapoteca/application/database"
-	databaseModels "mapoteca/application/database/models"
-	"mapoteca/application/logger"
-	"mapoteca/application/models"
+	"mapoteca/database"
+	databaseModels "mapoteca/database/models"
+	"mapoteca/logger"
+	"mapoteca/models"
 )
 
 func InsertPost(p models.Post) error {

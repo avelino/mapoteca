@@ -1,9 +1,9 @@
 package main
 
 import (
-	"mapoteca/application"
+	"mapoteca/server"
 )
 
 func main() {
-	application.Run()
+	server.Run()
 }

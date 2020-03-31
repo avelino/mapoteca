@@ -2,9 +2,9 @@ package post
 
 import (
 	"github.com/gofiber/fiber"
-	"mapoteca/application/database/models/post"
-	"mapoteca/application/logger"
-	"mapoteca/application/models"
+	"mapoteca/database/models/post"
+	"mapoteca/logger"
+	"mapoteca/models"
 )
 
 func GetPostBySlug(context *fiber.Ctx) {

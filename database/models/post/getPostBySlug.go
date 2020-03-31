@@ -2,9 +2,9 @@ package post
 
 import (
 	"github.com/jinzhu/gorm"
-	"mapoteca/application/database"
-	"mapoteca/application/logger"
-	"mapoteca/application/models"
+	"mapoteca/database"
+	"mapoteca/logger"
+	"mapoteca/models"
 )
 
 func GetPostBySlug(slug string) (models.Post, error) {

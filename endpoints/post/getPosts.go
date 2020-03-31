@@ -2,8 +2,8 @@ package post
 
 import (
 	"github.com/gofiber/fiber"
-	"mapoteca/application/database/models/post"
-	"mapoteca/application/logger"
+	"mapoteca/database/models/post"
+	"mapoteca/logger"
 )
 
 func GetPosts(context *fiber.Ctx) {

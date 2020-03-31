@@ -5,9 +5,9 @@ import (
 	"github.com/jinzhu/gorm"
 	// importing to be run at Global
 	_ "github.com/jinzhu/gorm/dialects/postgres"
-	"mapoteca/application/config"
-	"mapoteca/application/database/models"
-	"mapoteca/application/logger"
+	"mapoteca/config"
+	"mapoteca/database/models"
+	"mapoteca/logger"
 	"os"
 )
 

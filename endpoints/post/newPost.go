@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"github.com/gofiber/fiber"
 	slugify "github.com/gosimple/slug"
-	postModel "mapoteca/application/database/models/post"
-	"mapoteca/application/logger"
-	"mapoteca/application/models"
+	postModel "mapoteca/database/models/post"
+	"mapoteca/logger"
+	"mapoteca/models"
 	"reflect"
 	"time"
 )

@@ -1,11 +1,11 @@
-package application
+package server
 
 import (
 	"github.com/gofiber/fiber"
-	"mapoteca/application/config"
-	"mapoteca/application/database"
-	"mapoteca/application/endpoints/post"
-	"mapoteca/application/logger"
+	"mapoteca/config"
+	"mapoteca/database"
+	"mapoteca/endpoints/post"
+	"mapoteca/logger"
 )
 
 func Run() {
