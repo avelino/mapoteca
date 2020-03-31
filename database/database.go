@@ -44,7 +44,11 @@ func autoMigrate(db *gorm.DB) {
 	var log = logger.New()
 	log.Info("running AutoMigrate")
 
-	var migration = db.AutoMigrate(&models.Post{})
+	var migration = db.AutoMigrate(
+		&models.Post{},
+		&models.AuthToken{},
+		&models.PhysicalPubKey{},
+	)
 
 	if migration.Error != nil {
 		var msg = fmt.Sprintf("problem running migration: %d", migration.Error)

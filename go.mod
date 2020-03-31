@@ -3,6 +3,7 @@ module mapoteca
 go 1.13
 
 require (
+	github.com/GeertJohan/yubigo v0.0.0-20190917122436-175bc097e60e
 	github.com/gofiber/fiber v1.8.42
 	github.com/google/uuid v1.1.1
 	github.com/gosimple/slug v1.9.0
