@@ -60,7 +60,6 @@ func GenerateToken(context *fiber.Ctx) {
 		var cookie = new(fiber.Cookie)
 		cookie.Name = "robson"
 		cookie.Value = uuid.UUID.String(authToken)
-		cookie.Secure = true
 		cookie.Expires = time.Now().Add(24 * time.Hour)
 
 		context.Cookie(cookie)
