@@ -10,12 +10,14 @@ import (
 	"mapoteca/models"
 )
 
-func InsertPost(p models.Post) error {
+func InsertPost(p models.Post) (uuid.UUID, error) {
 	var log = logger.New()
 	log.Info("inserting post to database")
-	return database.DB.Transaction(func(tx *gorm.DB) error {
+	var postId uuid.UUID
+	var err = database.DB.Transaction(func(tx *gorm.DB) error {
+		var id = uuid.New()
 		var d = tx.Create(&databaseModels.Post{
-			ID:        uuid.New(),
+			ID:        id,
 			CreatedAt: p.CreatedAt,
 			Title:     p.Title,
 			Subtitle:  p.Subtitle,
@@ -28,7 +30,11 @@ func InsertPost(p models.Post) error {
 		if d.Error != nil {
 			var msg = fmt.Sprintf("problem at transaction with error: %d", d.Error)
 			log.Error(msg)
+		} else {
+			postId = id
 		}
 		return d.Error
 	})
+
+	return postId, err
 }

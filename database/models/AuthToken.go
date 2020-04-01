@@ -7,6 +7,6 @@ import (
 
 type AuthToken struct {
 	ID              uuid.UUID `gorm:"type:uuid;PRIMARY_KEY;unique;not null"`
-	KeyIdentifierId uuid.UUID `gorm:"type:uuid"`
+	KeyIdentifierId string    `gorm:"size:12"`
 	CreatedAt       time.Time
 }

@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gofiber/fiber"
+	"github.com/google/uuid"
 	slugify "github.com/gosimple/slug"
+	authTokenModel "mapoteca/database/models/authToken"
 	postModel "mapoteca/database/models/post"
 	"mapoteca/logger"
 	"mapoteca/models"
@@ -52,7 +54,22 @@ func slugCreator(slug string, title string) string {
 
 func NewPost(context *fiber.Ctx) {
 	var log = logger.New()
-	log.Info("creating new post")
+	log.Info("new post endpoint called")
+	log.Info("authenticating request")
+	var authTokenCookie = context.Cookies("robson")
+	var authTokenUUID, authTokenErr = uuid.Parse(authTokenCookie)
+	var _, tokenErr = authTokenModel.GetToken(authTokenUUID)
+	if authTokenErr != nil || tokenErr != nil {
+		var msg = fmt.Sprintf("authentication failed: %d", tokenErr)
+		log.Error(msg)
+		var response = models.HttpError{
+			ErrorMessage: "Not authorized",
+		}
+		context.Status(401).JSON(response)
+		return
+	}
+
+	log.Info("authentication successful")
 
 	var data newPost
 	var body = []byte(context.Body())
@@ -66,12 +83,11 @@ func NewPost(context *fiber.Ctx) {
 			FormErrorFields: fields,
 		}
 		log.Info(msg.ErrorMessage)
-		var response, _ = json.Marshal(msg)
-		context.Status(406).Send(response)
+		context.Status(406).JSON(msg)
 		return
 	}
 
-	var insertPostErr = postModel.InsertPost(models.Post{
+	var postId, insertPostErr = postModel.InsertPost(models.Post{
 		Title:     data.Title,
 		Subtitle:  data.Subtitle,
 		Slug:      slugCreator(data.Slug, data.Title),
@@ -87,10 +103,14 @@ func NewPost(context *fiber.Ctx) {
 			FormErrorFields: nil,
 		}
 		log.Error(msg)
-		var response, _ = json.Marshal(msg)
-		context.Status(500).Send(response)
+		context.Status(500).JSON(msg)
 		return
 	}
 
-	context.Send("ok")
+	var generatedIds []uuid.UUID
+
+	context.JSON(models.HttpSuccess{
+		Greetings:    "All good",
+		GeneratedIds: append(generatedIds, postId),
+	})
 }
