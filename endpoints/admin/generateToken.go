@@ -3,14 +3,13 @@ package admin
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/GeertJohan/yubigo"
 	"github.com/gofiber/fiber"
 	"github.com/google/uuid"
-	"mapoteca/config"
 	"mapoteca/database/models/authToken"
 	"mapoteca/database/models/physicalPubKey"
 	"mapoteca/logger"
 	"mapoteca/models"
+	"mapoteca/services/yubico"
 	"time"
 )
 
@@ -41,11 +40,7 @@ func GenerateToken(context *fiber.Ctx) {
 		return
 	}
 
-	log.Info("creating a new yubico auth instance")
-	var yubicoAuth, _ = yubigo.NewYubiAuth(config.YubicoConfig.ClientId, config.YubicoConfig.ApiKey)
-
-	log.Info("verificating OTP with yubico instance")
-	var _, ok, err = yubicoAuth.Verify(authData.OTP)
+	var ok, err = yubico.OTPValidation(authData.OTP)
 	if err != nil {
 		log.Error(err)
 		context.Status(401).JSON(models.HttpError{

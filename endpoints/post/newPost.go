@@ -6,7 +6,6 @@ import (
 	"github.com/gofiber/fiber"
 	"github.com/google/uuid"
 	slugify "github.com/gosimple/slug"
-	authTokenModel "mapoteca/database/models/authToken"
 	postModel "mapoteca/database/models/post"
 	"mapoteca/logger"
 	"mapoteca/models"
@@ -56,19 +55,6 @@ func slugCreator(slug string, title string) string {
 func NewPost(context *fiber.Ctx) {
 	var log = logger.New()
 	log.Info("new post endpoint called")
-	log.Info("authenticating request")
-	var authTokenCookie = context.Cookies("robson")
-	var authTokenUUID, authTokenErr = uuid.Parse(authTokenCookie)
-	var _, tokenErr = authTokenModel.GetToken(authTokenUUID)
-	if authTokenErr != nil || tokenErr != nil {
-		var msg = fmt.Sprintf("authentication failed: %d", tokenErr)
-		log.Error(msg)
-		var response = models.HttpError{
-			ErrorMessage: "Not authorized",
-		}
-		context.Status(401).JSON(response)
-		return
-	}
 
 	log.Info("authentication successful")
 
