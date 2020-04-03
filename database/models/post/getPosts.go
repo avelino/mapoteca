@@ -12,7 +12,7 @@ func GetPosts() ([]models.Post, error) {
 	log.Info("getting posts from database")
 	var posts []models.Post
 	var err = database.DB.Transaction(func(tx *gorm.DB) error {
-		var d = tx.Select("id, title, subtitle, slug, category, image_path, created_at").Find(&posts)
+		var d = tx.Order("created_at desc").Select("id, title, subtitle, slug, category, image_path, created_at").Find(&posts)
 
 		return d.Error
 	})
