@@ -5,7 +5,6 @@ import (
 	"github.com/google/uuid"
 	"github.com/jinzhu/gorm"
 	"mapoteca/database"
-	databaseModels "mapoteca/database/models"
 	"mapoteca/logger"
 	"mapoteca/models"
 )
@@ -16,7 +15,7 @@ func InsertPost(p models.Post) (uuid.UUID, error) {
 	var postId uuid.UUID
 	var err = database.DB.Transaction(func(tx *gorm.DB) error {
 		var id = uuid.New()
-		var d = tx.Create(&databaseModels.Post{
+		var d = tx.Create(&models.Post{
 			ID:        id,
 			CreatedAt: p.CreatedAt,
 			Title:     p.Title,

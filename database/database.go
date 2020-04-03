@@ -6,8 +6,9 @@ import (
 	// importing to be run at Global
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"mapoteca/config"
-	"mapoteca/database/models"
+	databaseModels "mapoteca/database/models"
 	"mapoteca/logger"
+	"mapoteca/models"
 	"os"
 )
 
@@ -46,8 +47,8 @@ func autoMigrate(db *gorm.DB) {
 
 	var migration = db.AutoMigrate(
 		&models.Post{},
-		&models.AuthToken{},
-		&models.PhysicalPubKey{},
+		&databaseModels.AuthToken{},
+		&databaseModels.PhysicalPubKey{},
 	)
 
 	if migration.Error != nil {

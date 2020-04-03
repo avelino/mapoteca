@@ -14,7 +14,7 @@ import (
 	"time"
 )
 
-type newPost struct {
+type HttpRequestPost struct {
 	Title     string
 	Subtitle  string
 	Slug      string
@@ -24,13 +24,13 @@ type newPost struct {
 	CreatedAt string
 }
 
-func getFieldString(p *newPost, field string) string {
+func getFieldString(p *HttpRequestPost, field string) string {
 	r := reflect.ValueOf(p)
 	f := reflect.Indirect(r).FieldByName(field)
 	return f.String()
 }
 
-func validateFields(p *newPost) (bool, []string) {
+func ValidateFields(p *HttpRequestPost) (bool, []string) {
 	var list = [4]string{"Title", "Subtitle", "Content", "Category"}
 	var emptyFields []string
 
@@ -72,11 +72,11 @@ func NewPost(context *fiber.Ctx) {
 
 	log.Info("authentication successful")
 
-	var data newPost
+	var data HttpRequestPost
 	var body = []byte(context.Body())
 	json.Unmarshal(body, &data)
 
-	var success, fields = validateFields(&data)
+	var success, fields = ValidateFields(&data)
 
 	if !success {
 		var msg = models.HttpError{
@@ -88,7 +88,6 @@ func NewPost(context *fiber.Ctx) {
 		return
 	}
 
-	fmt.Println(data.CreatedAt)
 	var createdAt time.Time
 	if data.CreatedAt == "" {
 		createdAt = time.Now()
@@ -96,7 +95,6 @@ func NewPost(context *fiber.Ctx) {
 		var newDate, _ = time.Parse("2006-01-02", data.CreatedAt)
 		createdAt = newDate
 	}
-	fmt.Println(createdAt)
 	var postId, insertPostErr = postModel.InsertPost(models.Post{
 		Title:     data.Title,
 		Subtitle:  data.Subtitle,

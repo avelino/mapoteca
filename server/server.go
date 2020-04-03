@@ -34,6 +34,7 @@ func Run() {
 	app.Get("/admin/auth", admin.GenerateToken)
 
 	app.Post("/post/new", post.NewPost)
+	app.Put("/post/update/:id", post.UpdatePost)
 
 	log.Info("application is running at port " + config.ServerConfig.Port)
 	app.Listen(config.ServerConfig.Port)

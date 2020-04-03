@@ -1,16 +1,18 @@
 package models
 
 import (
+	"github.com/google/uuid"
 	"time"
 )
 
 type Post struct {
-	Id        string    `json:"id"`
-	Title     string    `json:"title"`
-	Subtitle  string    `json:"subtitle"`
-	Slug      string    `json:"slug"`
-	ImagePath string    `json:"imagePath"`
-	Category  string    `json:"category"`
+	ID        uuid.UUID `gorm:"type:uuid;PRIMARY_KEY;unique;not null" json:"id"`
 	CreatedAt time.Time `json:"createdAt"`
-	Content   string    `json:"content"`
+	UpdatedAt time.Time `json:"updatedAt"`
+	Title     string    `gorm:"size:255;not null" json:"title"`
+	Subtitle  string    `gorm:"size:255;" json:"subtitle"`
+	Slug      string    `gorm:"size:255;unique;not null" json:"slug"`
+	ImagePath string    `gorm:"size:255" json:"imagePath"`
+	Category  string    `gorm:"size:16;not null" json:"category"`
+	Content   string    `gorm:"type:text;not null" json:"content"`
 }
