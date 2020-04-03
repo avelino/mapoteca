@@ -1,6 +1,7 @@
 package server
 
 import (
+	"github.com/gofiber/cors"
 	"github.com/gofiber/fiber"
 	"github.com/jinzhu/gorm"
 	"mapoteca/config"
@@ -17,6 +18,7 @@ func Run() {
 	config.Init()
 
 	var app = fiber.New()
+	app.Use(cors.New())
 
 	var db = database.Connect()
 	defer db.Close()
