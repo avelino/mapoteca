@@ -18,7 +18,10 @@ func Run() {
 	config.Init()
 
 	var app = fiber.New()
-	app.Use(cors.New())
+	app.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:3000"},
+		AllowCredentials: true,
+	}))
 
 	var db = database.Connect()
 	defer db.Close()
@@ -32,6 +35,7 @@ func Run() {
 	app.Get("/post/:slug", post.GetPostBySlug)
 
 	app.Get("/admin/auth", admin.GenerateToken)
+	app.Get("/admin/auth/verify", admin.VerifyAuth)
 
 	app.Post("/post/new", func(context *fiber.Ctx) {
 		Authenticate(context, post.NewPost)
