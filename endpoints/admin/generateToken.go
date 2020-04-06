@@ -21,8 +21,6 @@ func GenerateToken(context *fiber.Ctx) {
 	log.Info("generating authentication token")
 
 	var otp = context.Get("otp")
-	fmt.Println(len(otp))
-	fmt.Println(otp)
 	if len(otp) < 13 {
 		log.Info(fmt.Sprintf("Problem with otp length of %d", len(otp)))
 		context.Status(401).JSON(models.HttpError{
@@ -61,8 +59,9 @@ func GenerateToken(context *fiber.Ctx) {
 		cookie.Expires = time.Now().Add(24 * time.Hour)
 
 		context.Cookie(cookie)
-		context.JSON(successResponse{
-			Status: "success",
+		context.JSON(models.HttpSuccess{
+			Greetings:    "success",
+			GeneratedIds: []uuid.UUID{authToken},
 		})
 	}
 }
