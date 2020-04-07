@@ -78,7 +78,7 @@ func NewPost(context *fiber.Ctx) {
 	if data.CreatedAt == "" {
 		createdAt = time.Now()
 	} else {
-		var newDate, _ = time.Parse("2006-01-02", data.CreatedAt)
+		var newDate, _ = time.Parse("02/01/2006", data.CreatedAt)
 		createdAt = newDate
 	}
 	var postId, insertPostErr = postModel.InsertPost(models.Post{
