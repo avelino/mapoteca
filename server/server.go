@@ -19,7 +19,7 @@ func Run() {
 
 	var app = fiber.New()
 	app.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:3000"},
+		AllowOrigins:     []string{config.ClientUrl},
 		AllowCredentials: true,
 	}))
 

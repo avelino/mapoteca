@@ -31,6 +31,7 @@ var DatabaseConfig databaseConfig
 var ServerConfig serverConfig
 var YubicoConfig yubicoConfig
 var AdminConfig adminConfig
+var ClientUrl string
 
 func Init() {
 	var _ = godotenv.Load()
@@ -56,4 +57,6 @@ func Init() {
 	AdminConfig = adminConfig{
 		MasterPublicKey: os.Getenv("ADMIN_MASTER_PUBLIC_KEY"),
 	}
+
+	ClientUrl = os.Getenv("CLIENT_URL")
 }
