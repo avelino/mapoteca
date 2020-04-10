@@ -33,11 +33,7 @@ var YubicoConfig yubicoConfig
 var AdminConfig adminConfig
 
 func Init() {
-	var err = godotenv.Load()
-
-	if err != nil {
-		panic("Env vars not available")
-	}
+	var _ = godotenv.Load()
 
 	DatabaseConfig = databaseConfig{
 		Name:     os.Getenv("POSTGRESQL_DATABASE_NAME"),
