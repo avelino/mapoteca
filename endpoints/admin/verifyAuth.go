@@ -15,6 +15,10 @@ func VerifyAuth(context *fiber.Ctx) {
 	log.Info("verifying authentication")
 	var robson = context.Cookies("robson")
 	var uuidCookie, uuidCookieErr = uuid.Parse(robson)
+	fmt.Println(">>>>>>>>>>>>>> %d", robson)
+	fmt.Println(">>>>>>>>>>>>>> %s", robson)
+	fmt.Println(">>>>>>>>>>>>>> %d", context.Get("otp"))
+	fmt.Println(">>>>>>>>>>>>>> %s", context.Get("otp"))
 	if uuidCookieErr != nil {
 		log.Error(fmt.Sprintf("Problem parsing token. Error: %d", uuidCookieErr))
 		context.Status(401).JSON(models.HttpError{
