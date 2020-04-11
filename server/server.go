@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"github.com/gofiber/cors"
 	"github.com/gofiber/fiber"
 	"github.com/jinzhu/gorm"
@@ -23,8 +22,6 @@ func Run() {
 		AllowOrigins:     []string{config.ClientUrl},
 		AllowCredentials: true,
 	}))
-
-	fmt.Printf("CLIENT >>>>>>>>>>>> %s \n", config.ClientUrl)
 
 	var db = database.Connect()
 	defer db.Close()

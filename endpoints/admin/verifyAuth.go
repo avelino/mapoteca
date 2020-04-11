@@ -13,19 +13,18 @@ import (
 func VerifyAuth(context *fiber.Ctx) {
 	var log = logger.New()
 	log.Info("verifying authentication")
-	var robson = context.Cookies("robson")
-	var uuidCookie, uuidCookieErr = uuid.Parse(robson)
-	fmt.Printf(">>>>>>>>>>>>>> %s \n", robson)
-	fmt.Printf(">>>>>>>>>>>>>> %s \n", context.Get("otp"))
-	if uuidCookieErr != nil {
-		log.Error(fmt.Sprintf("Problem parsing token. Error: %d", uuidCookieErr))
+
+	var authorization = context.Get("Authorization")
+	var uuidToken, uuidTokenErr = uuid.Parse(authorization)
+	if uuidTokenErr != nil {
+		log.Error(fmt.Sprintf("Problem parsing token. Error: %d", uuidTokenErr))
 		context.Status(401).JSON(models.HttpError{
 			ErrorMessage: "Not authorized",
 		})
 		return
 	}
 
-	var token, tokenErr = authToken.GetToken(uuidCookie)
+	var token, tokenErr = authToken.GetToken(uuidToken)
 	if tokenErr != nil {
 		log.Error(fmt.Sprintf("Problem getting token at database. Error: %d", tokenErr))
 		context.Status(401).JSON(models.HttpError{

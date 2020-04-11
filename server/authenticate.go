@@ -14,8 +14,8 @@ func Authenticate(context *fiber.Ctx, endpointCallback func(*fiber.Ctx)) {
 	var log = logger.New()
 	log.Info("authenticating request")
 	var otp = context.Get("otp")
-	var authTokenCookie = context.Cookies("robson")
-	var authTokenUUID, authTokenErr = uuid.Parse(authTokenCookie)
+	var authorization = context.Get("Authorization")
+	var authTokenUUID, authTokenErr = uuid.Parse(authorization)
 	var _, tokenErr = authTokenModel.GetToken(authTokenUUID)
 
 	if authTokenErr != nil || tokenErr != nil {
