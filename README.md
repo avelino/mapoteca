@@ -6,7 +6,9 @@ Server responsible for storing (in a database) projects.
 
 ### Golang
 
-Install [Go version 1.13](https://godoc.org/golang.org/dl/go1.13)
+Install [Go](https://golang.org/doc/install)
+
+Change your version for [Go version 1.13](https://godoc.org/golang.org/dl/go1.13)
 
 ### PostgreSQL
 
