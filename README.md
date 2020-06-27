@@ -6,13 +6,29 @@ Server responsible for storing (in a database) projects.
 
 ### Golang
 
-Install [Go version 1.13](https://godoc.org/golang.org/dl/go1.13)
+Install [Go version 1.14](https://godoc.org/golang.org/dl/go1.14)
 
 ### PostgreSQL
 
 Install PostreSQL through your favorite package manager.
 
 Create your dataase and make sure to fill the environment variables at `.env` after reading the **Project configurations** topic.
+
+#### Configure your database
+
+Create a database with the name of your choice using the handy `createdb` command:
+
+```sh
+$ createdb mapoteca_localhost
+```
+
+Access it and create a user of your choice (not need to follow example below):
+
+```sh
+$ psql mapoteca_localhost
+
+mapoteca_localhost=# CREATE ROLE mapoteca_user WITH LOGIN PASSWORD 'password';
+```
 
 ## Project configurations
 
