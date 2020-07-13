@@ -47,6 +47,7 @@ func autoMigrate(db *gorm.DB) {
 
 	var migration = db.AutoMigrate(
 		&models.Post{},
+		&models.Person{},
 		&databaseModels.AuthToken{},
 		&databaseModels.PhysicalPubKey{},
 	)
