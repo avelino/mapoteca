@@ -15,4 +15,5 @@ type Post struct {
 	ImagePath string    `gorm:"size:255" json:"imagePath"`
 	Category  string    `gorm:"size:16;not null" json:"category"`
 	Content   string    `gorm:"type:text;not null" json:"content"`
+	PersonID  uuid.UUID `json:"personId"`
 }

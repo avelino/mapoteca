@@ -12,4 +12,5 @@ type Person struct {
 	Email     string    `gorm:"size:255;not null" json:"email"`
 	FirstName string    `gorm:"size:255;not null" json:"firstName"`
 	LastName  string    `gorm:"size:255;not null" json:"lastName"`
+	Posts     []Post    `gorm:"foreignKey:PersonID"`
 }
