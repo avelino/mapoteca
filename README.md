@@ -12,7 +12,7 @@ Install [Go version 1.14](https://godoc.org/golang.org/dl/go1.14)
 
 Install PostreSQL through your favorite package manager.
 
-Create your dataase and make sure to fill the environment variables at `.env` after reading the **Project configurations** topic.
+Create your database and make sure to fill the environment variables at `.env` after reading the **Project configurations** topic.
 
 #### Configure your database
 
